@@ -16,16 +16,7 @@ type ChangePasswordRequest struct {
 	Password string `json:"password" binding:"required"`
 }
 
-type UserResponse struct {
-	ID                string  `json:"id" db:"id"`
-	Username          string  `json:"username" db:"username"`
-	Password          string  `json:"password" db:"password"`
-	IsActive          bool    `json:"is_active" db:"is_active"`
-	IsCustomer        bool    `json:"is_customer" db:"is_customer"`
-	PasswordChangedAt *string `json:"password_changed_at" db:"password_changed_at"`
-}
-
 type LoginResponse struct {
-	User  UserResponse `json:"user"`
-	Token string       `json:"token"`
+	User  User   `json:"user"`
+	Token string `json:"token"`
 }
