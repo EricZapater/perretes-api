@@ -14,7 +14,7 @@ CREATE TABLE customers(
 	ID uuid primary key not null,
 	name varchar(250) not null,
 	surname varchar(250) not null,
-	phone varchar(20),
+	phone_number varchar(20),
 	email varchar(250),
 	user_id uuid references users(id) on delete cascade,
 	is_active bool default true
@@ -22,6 +22,6 @@ CREATE TABLE customers(
 
 CREATE INDEX idx_customers_user_id ON customers(user_id);
 CREATE INDEX idx_customers_email ON customers(email);
-CREATE INDEX idx_customers_phone ON customers(phone);
+CREATE INDEX idx_customers_phone_number ON customers(phone_number);
 CREATE INDEX idx_customers_is_active ON customers(is_active);
 
