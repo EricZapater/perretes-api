@@ -31,10 +31,11 @@ func(s *customerService) Create(ctx context.Context, request CustomerRequest)(Cu
 	request.Username == "" || request.Password == "" {
 		return Customer{}, ErrInvalidRequest
 	}
+	iscustomer := true
 	user := users.UserRequest {		
 		Username: request.Username,
 		Password: request.Password,		
-		IsCustomer: true,	
+		IsCustomer: &iscustomer,	
 	}	
 	createdUser, err := s.usersService.Create(ctx, user)
 	if err != nil {

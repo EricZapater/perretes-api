@@ -56,7 +56,7 @@ func(s *userService) Create(ctx context.Context, request UserRequest) (User, err
 		Username: request.Username,
 		Password: string(hashedPassword),		
 		IsActive: true,		
-		IsCustomer: request.IsCustomer,		
+		IsCustomer: *request.IsCustomer,		
 		PasswordChangedAt: &now,		
 	}
 
@@ -90,7 +90,7 @@ func(s *userService) Update(ctx context.Context,id string,  request UserRequest)
 	user := User{
 		ID:       uuid.MustParse(id),		
 		Username: request.Username,	
-		IsCustomer: request.IsCustomer,			
+		IsCustomer: *request.IsCustomer,			
 		PasswordChangedAt: &now,		
 	}
 

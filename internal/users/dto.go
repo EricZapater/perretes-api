@@ -8,7 +8,7 @@ type LoginRequest struct {
 type UserRequest struct {
 	Username   string `json:"username" binding:"required"`
 	Password   string `json:"password" binding:"required"`
-	IsCustomer bool   `json:"is_customer" binding:"required"`
+	IsCustomer *bool  `json:"is_customer" binding:"required"`
 }
 
 type ChangePasswordRequest struct {
