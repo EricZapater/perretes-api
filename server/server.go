@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"perretes-api/config"
 	"perretes-api/internal/auth"
+	"perretes-api/internal/courses"
 	"perretes-api/internal/customers"
 	"perretes-api/internal/health"
 	"perretes-api/internal/users"
@@ -43,11 +44,13 @@ func (s *Server) Setup() error {
 	// Inicialitzar repositoris
 	userRepo := users.NewUserRepository(s.db)
 	customerRepo := customers.NewCustomerRepository(s.db)
+	coursesRepo := courses.NewCourseRepository(s.db)
 
 	// Inicialitzar serveis
 	userService := users.NewUserService(userRepo)
 	authService := auth.NewAuthService(userRepo, authMiddleware)
 	customerService := customers.NewCustomerService(customerRepo, userService)
+	coursesService := courses.NewCourseService(coursesRepo)
 
 
 
@@ -55,6 +58,7 @@ func (s *Server) Setup() error {
 	userHandler := users.NewUserHandler(userService)
 	authHandler := auth.NewAuthHandler(authService, authMiddleware)
 	customerHandler := customers.NewCustomerHandler(customerService)
+	coursesHandler := courses.NewCourseHandler(coursesService)
 
 
 	
@@ -75,6 +79,7 @@ func (s *Server) Setup() error {
 	// Registrar les rutes protegides
 	users.RegisterRoutes(protected, userHandler)
 	customers.RegisterRoutes(protected, customerHandler)
+	courses.RegisterRoutes(protected, coursesHandler)
 
 	
 	return nil
